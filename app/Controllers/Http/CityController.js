@@ -7,6 +7,10 @@
 /**
  * Resourceful controller for interacting with cities
  */
+
+
+const city = use('App/Models/City')
+
 class CityController {
   /**
    * Show a list of all cities.
@@ -18,6 +22,7 @@ class CityController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    return city.all();
   }
 
   /**

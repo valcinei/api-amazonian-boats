@@ -21,3 +21,4 @@ Route.get('/', () => {
 })
 
 Route.resource('boats', 'BoatController')
+Route.resource('cities', 'CityController')

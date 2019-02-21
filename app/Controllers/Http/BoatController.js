@@ -31,6 +31,7 @@ class BoatController {
    * @param {View} ctx.view
    */
   async create ({ request, response, view }) {
+  
   }
 
   /**
@@ -42,6 +43,7 @@ class BoatController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+      return JSON.stringify(request.body)
   }
 
   /**
