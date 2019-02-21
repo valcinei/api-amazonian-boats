@@ -6,6 +6,7 @@ const Schema = use('Schema')
 class BoatRouteSchema extends Schema {
   up () {
     this.create('boat_routes', (table) => {
+      table.increments()
       table.integer('boat_id').unsigned()
       table.foreign('boat_id')
         .references('id')
@@ -19,7 +20,6 @@ class BoatRouteSchema extends Schema {
           .inTable('routes')
           .onDelete('CASCADE')
           .onUpdate('CASCADE');
-      table.increments()
       table.timestamps()
     })
   }

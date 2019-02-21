@@ -10,6 +10,8 @@
 
 const Boat = use('App/Models/Boat');
 const Contact = use('App/Models/Contact');
+const Route = use('App/Models/Route');
+const BoatRoute = use('App/Models/BoatRoute');
 
 const Database = use('Database');
 class BoatController {
@@ -23,7 +25,7 @@ class BoatController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    return Boat.query().with('contact').fetch();
+    return Boat.query().with('contact').with('routes').fetch();
   }
 
   /**
@@ -48,21 +50,39 @@ class BoatController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const trx = await Database.beginTransaction();
 
+    const trx = await Database.beginTransaction();
     const data = request.all();
     const boat = new Boat();
     const contact = new Contact();
+
 
     contact.name = data.contact.name;
     contact.phone_1 = data.contact.phone1;
     contact.phone_2 = data.contact.phone2;
 
-    await  contact.save();
+    await  contact.save(trx);
     boat.name = data.name;
     boat.contact_id = contact.id;
-    await boat.save() ;
-    return boat;
+    await boat.save(trx) ;
+    data.routes.forEach((routeItem)=>{
+      const r = new Route();
+      r.name =  routeItem.name;
+      r.departure_city = routeItem.departureCity.id;
+      r.arrival_city = routeItem.arrivalCity.id;
+      r.departure_hour = routeItem.departureHour;
+      r.arrival_hour = routeItem.arrivalHour;
+      r.departure_day = routeItem.departureDay;
+      r.arrival_day = routeItem.arrivalDay;
+      r.departure_local = routeItem.departureLocal;
+      r.arrival_local = routeItem.arrivalLocal;
+      r.save(trx);
+      const boatRoute = new BoatRoute();
+      boatRoute.boat_id = boat.id ;
+      boatRoute.route_id = r.id;
+      
+    });
+    
     await trx.commit();
     // if something gone wrong
     await trx.rollback

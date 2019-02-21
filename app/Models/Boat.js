@@ -12,6 +12,10 @@ class Boat extends Model {
     contact() {
         return this.belongsTo('App/Models/Contact');
     }
+    
+    routes() {
+        return this.belongsToMany('App/Models/Route').pivotTable('boat_routes');
+    }
 }
 
 module.exports = Boat
