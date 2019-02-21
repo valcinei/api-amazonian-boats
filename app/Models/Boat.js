@@ -4,8 +4,13 @@
 const Model = use('Model')
 
 class Boat extends Model {
-    routes() {
-        return this.belongsToMany('App/Models/Route');
+    
+    static get hidden () {
+        return ['created_at', 'updated_at']
+      }
+
+    contact() {
+        return this.belongsTo('App/Models/Contact');
     }
 }
 

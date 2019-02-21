@@ -23,7 +23,7 @@ class BoatController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    return Boat.all();
+    return Boat.query().with('contact').fetch();
   }
 
   /**

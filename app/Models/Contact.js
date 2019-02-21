@@ -4,6 +4,11 @@
 const Model = use('Model')
 
 class Contact extends Model {
+
+    static get hidden () {
+        return ['created_at', 'updated_at']
+      }
+      
 }
 
 module.exports = Contact

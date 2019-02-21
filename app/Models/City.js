@@ -4,6 +4,7 @@
 const Model = use('Model')
 
 class City extends Model {
+    
     static get hidden () {
         return ['created_at', 'updated_at']
       }
