@@ -13,14 +13,14 @@ class RouteSchema extends Schema {
         table.foreign('derparture_city')
           .references('id')
           .inTable('cities')
-          .onDelete('cascade')
-          .onUpdate('cascade');
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
       table.integer('arrival_city').unsigned()
         table.foreign('arrival_city')
           .references('id')
           .inTable('cities')
-          .onDelete('cascade')
-          .onUpdate('cascade');
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
 
       table.string('derparture_hour', 45).notNullable()
       table.string('arrival_hour', 45).notNullable()

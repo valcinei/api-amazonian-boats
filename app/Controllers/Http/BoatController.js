@@ -7,6 +7,11 @@
 /**
  * Resourceful controller for interacting with boats
  */
+
+const Boat = use('App/Models/Boat');
+const Contact = use('App/Models/Contact');
+
+const Database = use('Database');
 class BoatController {
   /**
    * Show a list of all boats.
@@ -18,7 +23,7 @@ class BoatController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    return 
+    return Boat.all();
   }
 
   /**
@@ -43,7 +48,25 @@ class BoatController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-      return JSON.stringify(request.body)
+    const trx = await Database.beginTransaction();
+
+    const data = request.all();
+    const boat = new Boat();
+    const contact = new Contact();
+
+    contact.name = data.contact.name;
+    contact.phone_1 = data.contact.phone1;
+    contact.phone_2 = data.contact.phone2;
+
+    await  contact.save();
+    boat.name = data.name;
+    boat.contact_id = contact.id;
+    await boat.save() ;
+    return boat;
+    await trx.commit();
+    // if something gone wrong
+    await trx.rollback
+
   }
 
   /**

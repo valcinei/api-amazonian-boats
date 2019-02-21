@@ -9,7 +9,7 @@
  */
 
 
-const city = use('App/Models/City')
+const City = use('App/Models/City');
 
 class CityController {
   /**
@@ -22,7 +22,7 @@ class CityController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    return city.all();
+    return City.all();
   }
 
   /**

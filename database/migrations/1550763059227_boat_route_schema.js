@@ -10,15 +10,15 @@ class BoatRouteSchema extends Schema {
       table.foreign('boat_id')
         .references('id')
         .inTable('boats')
-        .onDelete('cascade')
-        .onUpdate('cascade');
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
       
       table.integer('route_id').unsigned()
         table.foreign('route_id')
           .references('id')
           .inTable('routes')
-          .onDelete('cascade')
-          .onUpdate('cascade');
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
       table.increments()
       table.timestamps()
     })

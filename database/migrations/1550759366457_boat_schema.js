@@ -12,8 +12,8 @@ class BoatSchema extends Schema {
         table.foreign('contact_id')
           .references('id')
           .inTable('contacts')
-          .onDelete('cascade')
-          .onUpdate('cascade');
+          .onDelete('CASCADE')
+          .onUpdate('CASCADE');
       table.timestamps()
     })
   }
