@@ -6,7 +6,7 @@ const Model = use('Model')
 class Boat extends Model {
     
     static get hidden () {
-        return ['created_at', 'updated_at']
+        return ['created_at', 'updated_at', 'contact_id']
       }
 
     contact() {
