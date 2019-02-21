@@ -6,23 +6,25 @@ const Schema = use('Schema')
 class RouteSchema extends Schema {
   up () {
     this.create('routes', (table) => {
-      table.increments()
-      table.foreign('boat_id')
-        .references('id')
-        .inTable('boats')
-        .onDelete('cascade')
-        .onUpdate('cascade');
-
-      table.foreign('derparture_city')
-        .references('id')
-        .inTable('cities')
-        .onDelete('cascade')
-        .onUpdate('cascade');
-      table.foreign('arrival_city')
-        .references('id')
-        .inTable('cities')
-        .onDelete('cascade')
-        .onUpdate('cascade');
+      table.increments().unique()
+      table.integer('boat_id').unsigned()
+        table.foreign('boat_id')
+          .references('id')
+          .inTable('boats')
+          .onDelete('cascade')
+          .onUpdate('cascade');
+      table.integer('derparture_city').unsigned()
+        table.foreign('derparture_city')
+          .references('id')
+          .inTable('cities')
+          .onDelete('cascade')
+          .onUpdate('cascade');
+        table.integer('arrival_city').unsigned()
+        table.foreign('arrival_city')
+          .references('id')
+          .inTable('cities')
+          .onDelete('cascade')
+          .onUpdate('cascade');
 
       table.string('derparture_hour', 45).notNullable()
       table.string('arrival_hour', 45).notNullable()
