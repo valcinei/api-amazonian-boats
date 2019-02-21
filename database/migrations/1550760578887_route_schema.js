@@ -7,19 +7,15 @@ class RouteSchema extends Schema {
   up () {
     this.create('routes', (table) => {
       table.increments().unique()
-      table.integer('boat_id').unsigned()
-        table.foreign('boat_id')
-          .references('id')
-          .inTable('boats')
-          .onDelete('cascade')
-          .onUpdate('cascade');
+      table.string('name', 45).notNullable()
+
       table.integer('derparture_city').unsigned()
         table.foreign('derparture_city')
           .references('id')
           .inTable('cities')
           .onDelete('cascade')
           .onUpdate('cascade');
-        table.integer('arrival_city').unsigned()
+      table.integer('arrival_city').unsigned()
         table.foreign('arrival_city')
           .references('id')
           .inTable('cities')
